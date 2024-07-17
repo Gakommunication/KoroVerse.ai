@@ -1,0 +1,586 @@
+<html><head><base href="https://koroverse.ai/" /><title>KoroVerse - Expérience Coranique Interactive</title><meta name="viewport" content="width=device-width, initial-scale=1" /><style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+  
+    :root {
+      --primary-color: #4CAF50;
+      --secondary-color: #45a049;
+      --background-color: #f0f8f0;
+      --text-color: #333;
+      --accent-color: #FF9800;
+    }
+  
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    body.dark-mode {
+      --primary-color: #45a049;
+      --secondary-color: #4CAF50;
+      --background-color: #1a1a1a;
+      --text-color: #f0f0f0;
+      --accent-color: #FFA726;
+    }
+  
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+  
+    header {
+      background-color: var(--primary-color);
+      padding: 15px 0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+  
+    header.scrolled {
+      padding: 10px 0;
+      background-color: rgba(76, 175, 80, 0.9);
+    }
+  
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+  
+    .logo:hover {
+      transform: scale(1.05);
+    }
+  
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+  
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 10px 15px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+  
+    .nav-links a:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+  
+    #dark-mode-toggle {
+      background-color: var(--accent-color);
+      border: none;
+      color: #ffffff;
+      padding: 10px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+  
+    #dark-mode-toggle:hover {
+      background-color: #FFA726;
+      transform: translateY(-2px);
+    }
+  
+    main {
+      margin-top: 80px;
+    }
+  
+    .hero {
+      text-align: center;
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: #ffffff;
+      border-radius: 0 0 50% 50% / 20px;
+    }
+  
+    h1 {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+  
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: -50px;
+      padding: 0 20px;
+    }
+  
+    .feature-card {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      flex: 1;
+      min-width: 250px;
+      max-width: 350px;
+    }
+  
+    .dark-mode .feature-card {
+      background-color: #2a2a2a;
+      box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    }
+  
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+  
+    .feature-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+  
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+  
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  
+    .quran-reader {
+      background-color: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+  
+    .dark-mode .quran-reader {
+      background-color: #2a2a2a;
+      box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    }
+  
+    .surah-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: var(--background-color);
+      border-radius: 10px;
+    }
+  
+    .surah-btn {
+      background-color: var(--primary-color);
+      border: none;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+  
+    .surah-btn:hover {
+      background-color: var(--secondary-color);
+      transform: scale(1.05);
+    }
+  
+    footer {
+      background-color: var(--primary-color);
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 50px;
+      color: #ffffff;
+    }
+  
+    #surah-content {
+      margin-top: 30px;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+  
+    .dark-mode #surah-content {
+      background-color: #2a2a2a;
+      box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+    }
+  
+    #audio-player {
+      width: 100%;
+      margin-top: 30px;
+      border-radius: 10px;
+    }
+  
+    .verse {
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: var(--background-color);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+  
+    .verse:hover {
+      background-color: #e6ffe6;
+      transform: translateY(-5px);
+    }
+  
+    .dark-mode .verse:hover {
+      background-color: #3a3a3a;
+    }
+  
+    .verse-arabic {
+      font-size: 28px;
+      text-align: right;
+      margin-bottom: 15px;
+      font-family: 'Traditional Arabic', serif;
+      color: var(--primary-color);
+    }
+  
+    .verse-translation {
+      font-style: italic;
+      margin-top: 10px;
+    }
+  
+    .verse-transliteration {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  
+    .dark-mode .verse-transliteration {
+      color: #aaa;
+    }
+  
+    .verse-number {
+      font-weight: bold;
+      color: var(--accent-color);
+      font-size: 18px;
+    }
+  
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+  
+      .features {
+        flex-direction: column;
+      }
+  
+      .feature-card {
+        max-width: 100%;
+      }
+  
+      h1 {
+        font-size: 36px;
+      }
+  
+      .hero {
+        padding: 60px 0;
+      }
+    }
+  </style></head><body>
+    <header id="main-header">
+      <div class="container">
+        <nav>
+          <div class="logo">KoroVerse</div>
+          <div class="nav-links">
+            <a href="#home">Accueil</a>
+            <a href="#features">Fonctionnalités</a>
+            <a href="#quran-reader">Lecteur de Coran</a>
+            <button id="dark-mode-toggle">Mode Nuit</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+  
+    <main class="container">
+      <section id="home" class="hero">
+        <h1>Voyage Éducatif et Paisible dans le Coran : Une Expérience Enrichissante</h1>
+        <p>Immergez-vous dans les paroles sacrées avec notre plateforme coranique interactive, conçue pour une exploration spirituelle moderne et intuitive.</p>
+      </section>
+  
+      <section id="features" class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🎧</div>
+          <h2>Récitation Audio</h2>
+          <p>Écoutez les plus belles voix réciter le Coran avec notre lecteur audio intégré de haute qualité.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📖</div>
+          <h2>Lecture Interactive</h2>
+          <p>Naviguez facilement à travers les sourates et les versets avec notre interface utilisateur intuitive et élégante.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌙</div>
+          <h2>Mode Nuit</h2>
+          <p>Profitez d'une lecture confortable même dans l'obscurité avec notre mode nuit intégré.</p>
+        </div>
+      </section>
+  
+      <section id="quran-reader" class="quran-reader">
+        <h2>Lecteur de Coran Interactif</h2>
+        <div class="surah-list" id="surah-list">
+          <!-- Les boutons des sourates seront générés ici dynamiquement -->
+        </div>
+        <div id="surah-content">
+          <!-- Le contenu de la sourate sera chargé ici -->
+        </div>
+        <audio id="audio-player" controls>
+          Votre navigateur ne supporte pas l'élément audio.
+        </audio>
+      </section>
+    </main>
+  
+    <footer>
+      <p>&copy; 2023 KoroVerse. Tous droits réservés. Conçu avec ❤️ pour une expérience spirituelle moderne.</p>
+    </footer>
+  
+    <script>
+      const surahs = [
+        {number: 1, name: "Al-Fatiha", frenchName: "L'Ouverture"},
+        {number: 2, name: "Al-Baqara", frenchName: "La Vache"},
+        {number: 3, name: "Aal-E-Imran", frenchName: "La Famille d'Imran"},
+        {number: 4, name: "An-Nisa", frenchName: "Les Femmes"},
+        {number: 5, name: "Al-Maidah", frenchName: "La Table Servie"},
+        {number: 6, name: "Al-An'am", frenchName: "Les Bestiaux"},
+        {number: 7, name: "Al-A'raf", frenchName: "Les Murailles"},
+        {number: 8, name: "Al-Anfal", frenchName: "Le Butin"},
+        {number: 9, name: "At-Tawbah", frenchName: "Le Repentir"},
+        {number: 10, name: "Yunus", frenchName: "Jonas"},
+        {number: 11, name: "Hud", frenchName: "Hud"},
+        {number: 12, name: "Yusuf", frenchName: "Joseph"},
+        {number: 13, name: "Ar-Ra'd", frenchName: "Le Tonnerre"},
+        {number: 14, name: "Ibrahim", frenchName: "Abraham"},
+        {number: 15, name: "Al-Hijr", frenchName: "Al-Hijr"},
+        {number: 16, name: "An-Nahl", frenchName: "Les Abeilles"},
+        {number: 17, name: "Al-Isra", frenchName: "Le Voyage Nocturne"},
+        {number: 18, name: "Al-Kahf", frenchName: "La Caverne"},
+        {number: 19, name: "Maryam", frenchName: "Marie"},
+        {number: 20, name: "Ta-Ha", frenchName: "Ta-Ha"},
+        {number: 21, name: "Al-Anbiya", frenchName: "Les Prophètes"},
+        {number: 22, name: "Al-Hajj", frenchName: "Le Pèlerinage"},
+        {number: 23, name: "Al-Mu'minun", frenchName: "Les Croyants"},
+        {number: 24, name: "An-Nur", frenchName: "La Lumière"},
+        {number: 25, name: "Al-Furqan", frenchName: "Le Discernement"},
+        {number: 26, name: "Ash-Shu'ara", frenchName: "Les Poètes"},
+        {number: 27, name: "An-Naml", frenchName: "Les Fourmis"},
+        {number: 28, name: "Al-Qasas", frenchName: "Les Récits"},
+        {number: 29, name: "Al-Ankabut", frenchName: "L'Araignée"},
+        {number: 30, name: "Ar-Rum", frenchName: "Les Romains"},
+        {number: 31, name: "Luqman", frenchName: "Luqman"},
+        {number: 32, name: "As-Sajda", frenchName: "La Prosternation"},
+        {number: 33, name: "Al-Ahzab", frenchName: "Les Coalisés"},
+        {number: 34, name: "Saba", frenchName: "Saba"},
+        {number: 35, name: "Fatir", frenchName: "Le Créateur"},
+        {number: 36, name: "Ya-Sin", frenchName: "Ya-Sin"},
+        {number: 37, name: "As-Saffat", frenchName: "Les Rangés"},
+        {number: 38, name: "Sad", frenchName: "Sad"},
+        {number: 39, name: "Az-Zumar", frenchName: "Les Groupes"},
+        {number: 40, name: "Ghafir", frenchName: "Le Pardonneur"},
+        {number: 41, name: "Fussilat", frenchName: "Les Versets Détaillés"},
+        {number: 42, name: "Ash-Shura", frenchName: "La Consultation"},
+        {number: 43, name: "Az-Zukhruf", frenchName: "L'Ornement"},
+        {number: 44, name: "Ad-Dukhan", frenchName: "La Fumée"},
+        {number: 45, name: "Al-Jathiya", frenchName: "L'Agenouillée"},
+        {number: 46, name: "Al-Ahqaf", frenchName: "Les Dunes"},
+        {number: 47, name: "Muhammad", frenchName: "Muhammad"},
+        {number: 48, name: "Al-Fath", frenchName: "La Victoire Éclatante"},
+        {number: 49, name: "Al-Hujurat", frenchName: "Les Appartements"},
+        {number: 50, name: "Qaf", frenchName: "Qaf"},
+        {number: 51, name: "Adh-Dhariyat", frenchName: "Les Vents Qui Éparpillent"},
+        {number: 52, name: "At-Tur", frenchName: "Le Mont"},
+        {number: 53, name: "An-Najm", frenchName: "L'Étoile"},
+        {number: 54, name: "Al-Qamar", frenchName: "La Lune"},
+        {number: 55, name: "Ar-Rahman", frenchName: "Le Tout Miséricordieux"},
+        {number: 56, name: "Al-Waqia", frenchName: "L'Événement Inévitable"},
+        {number: 57, name: "Al-Hadid", frenchName: "Le Fer"},
+        {number: 58, name: "Al-Mujadila", frenchName: "La Discussion"},
+        {number: 59, name: "Al-Hashr", frenchName: "L'Exode"},
+        {number: 60, name: "Al-Mumtahina", frenchName: "L'Éprouvée"},
+        {number: 61, name: "As-Saff", frenchName: "Le Rang"},
+        {number: 62, name: "Al-Jumua", frenchName: "Le Vendredi"},
+        {number: 63, name: "Al-Munafiqun", frenchName: "Les Hypocrites"},
+        {number: 64, name: "At-Taghabun", frenchName: "La Grande Perte"},
+        {number: 65, name: "At-Talaq", frenchName: "Le Divorce"},
+        {number: 66, name: "At-Tahrim", frenchName: "L'Interdiction"},
+        {number: 67, name: "Al-Mulk", frenchName: "La Royauté"},
+        {number: 68, name: "Al-Qalam", frenchName: "La Plume"},
+        {number: 69, name: "Al-Haqqa", frenchName: "L'Inévitable"},
+        {number: 70, name: "Al-Ma'arij", frenchName: "Les Voies d'Ascension"},
+        {number: 71, name: "Nuh", frenchName: "Noé"},
+        {number: 72, name: "Al-Jinn", frenchName: "Les Djinns"},
+        {number: 73, name: "Al-Muzzammil", frenchName: "L'Enveloppé"},
+        {number: 74, name: "Al-Muddathir", frenchName: "Le Revêtu d'un Manteau"},
+        {number: 75, name: "Al-Qiyama", frenchName: "La Résurrection"},
+        {number: 76, name: "Al-Insan", frenchName: "L'Homme"},
+        {number: 77, name: "Al-Mursalat", frenchName: "Les Envoyés"},
+        {number: 78, name: "An-Naba", frenchName: "La Grande Nouvelle"},
+        {number: 79, name: "An-Nazi'at", frenchName: "Les Anges Qui Arrachent Les Âmes"},
+        {number: 80, name: "Abasa", frenchName: "Il S'est Renfrogné"},
+        {number: 81, name: "At-Takwir", frenchName: "L'Obscurcissement"},
+        {number: 82, name: "Al-Infitar", frenchName: "La Fission"},
+        {number: 83, name: "Al-Mutaffifin", frenchName: "Les Fraudeurs"},
+        {number: 84, name: "Al-Inshiqaq", frenchName: "La Déchirure"},
+        {number: 85, name: "Al-Buruj", frenchName: "Les Constellations"},
+        {number: 86, name: "At-Tariq", frenchName: "L'Astre Nocturne"},
+        {number: 87, name: "Al-A'la", frenchName: "Le Très-Haut"},
+        {number: 88, name: "Al-Ghashiya", frenchName: "L'Accablante"},
+        {number: 89, name: "Al-Fajr", frenchName: "L'Aube"},
+        {number: 90, name: "Al-Balad", frenchName: "La Cité"},
+        {number: 91, name: "Ash-Shams", frenchName: "Le Soleil"},
+        {number: 92, name: "Al-Lail", frenchName: "La Nuit"},
+        {number: 93, name: "Ad-Duha", frenchName: "Le Jour Montant"},
+        {number: 94, name: "Ash-Sharh", frenchName: "L'Ouverture"},
+        {number: 95, name: "At-Tin", frenchName: "Le Figuier"},
+        {number: 96, name: "Al-Alaq", frenchName: "L'Adhérence"},
+        {number: 97, name: "Al-Qadr", frenchName: "La Destinée"},
+        {number: 98, name: "Al-Bayyina", frenchName: "La Preuve"},
+        {number: 99, name: "Az-Zalzala", frenchName: "La Secousse"},
+        {number: 100, name: "Al-Adiyat", frenchName: "Les Coursiers"},
+        {number: 101, name: "Al-Qaria", frenchName: "Le Fracas"},
+        {number: 102, name: "At-Takathur", frenchName: "La Course Aux Richesses"},
+        {number: 103, name: "Al-Asr", frenchName: "Le Temps"},
+        {number: 104, name: "Al-Humaza", frenchName: "Les Calomniateurs"},
+        {number: 105, name: "Al-Fil", frenchName: "L'Éléphant"},
+        {number: 106, name: "Quraysh", frenchName: "Les Qurayshites"},
+        {number: 107, name: "Al-Ma'un", frenchName: "L'Ustensile"},
+        {number: 108, name: "Al-Kawthar", frenchName: "L'Abondance"},
+        {number: 109, name: "Al-Kafirun", frenchName: "Les Mécréants"},
+        {number: 110, name: "An-Nasr", frenchName: "Le Secours"},
+        {number: 111, name: "Al-Masad", frenchName: "Les Fibres"},
+        {number: 112, name: "Al-Ikhlas", frenchName: "Le Monothéisme Pur"},
+        {number: 113, name: "Al-Falaq", frenchName: "L'Aube Naissante"},
+        {number: 114, name: "An-Nas", frenchName: "Les Hommes"}
+      ];
+  
+      function generateSurahButtons() {
+        const surahList = document.getElementById('surah-list');
+        surahs.forEach(surah => {
+          const button = document.createElement('button');
+          button.className = 'surah-btn';
+          button.textContent = `${surah.number}. ${surah.frenchName}`;
+          button.onclick = () => loadSurah(surah.number);
+          surahList.appendChild(button);
+        });
+      }
+  
+      async function loadSurah(surahNumber) {
+        const surahContent = document.getElementById('surah-content');
+        const audioPlayer = document.getElementById('audio-player');
+        const surah = surahs.find(s => s.number === surahNumber);
+        
+        surahContent.innerHTML = `<h3>Sourate ${surahNumber}: ${surah.frenchName} (${surah.name})</h3>
+                                  <p>Chargement du contenu de la sourate ${surahNumber}...</p>`;
+        
+        try {
+          const [arabicResponse, translationResponse, transliterationResponse] = await Promise.all([
+            fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}`),
+            fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/fr.hamidullah`),
+            fetch(`https://api.alquran.cloud/v1/surah/${surahNumber}/en.transliteration`)
+          ]);
+  
+          const [arabicData, translationData, transliterationData] = await Promise.all([
+            arabicResponse.json(),
+            translationResponse.json(),
+            transliterationResponse.json()
+          ]);
+  
+          if (arabicData.code === 200 && translationData.code === 200 && transliterationData.code === 200) {
+            surahContent.innerHTML = `<h3>Sourate ${surahNumber}: ${surah.frenchName} (${surah.name})</h3>`;
+            arabicData.data.ayahs.forEach((ayah, index) => {
+              surahContent.innerHTML += `
+                <div class="verse" data-verse="${index + 1}">
+                  <div class="verse-arabic">${ayah.text}</div>
+                  <div class="verse-transliteration"><span class="verse-number">${ayah.numberInSurah}.</span> ${transliterationData.data.ayahs[index].text}</div>
+                  <div class="verse-translation">${translationData.data.ayahs[index].text}</div>
+                </div>
+              `;
+            });
+          } else {
+            throw new Error('Erreur lors du chargement de la sourate');
+          }
+        } catch (error) {
+          surahContent.innerHTML += `<p>Erreur lors du chargement du contenu de la sourate. Veuillez réessayer plus tard.</p>`;
+          console.error('Erreur:', error);
+        }
+  
+        // Configurer le lecteur audio
+        audioPlayer.src = `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`;
+        audioPlayer.load(); // Recharger l'audio pour la nouvelle source
+      }
+  
+      // Initialiser la page
+      generateSurahButtons();
+      loadSurah(1); // Charger la première sourate par défaut
+  
+      // Effet de scroll pour le header
+      window.addEventListener('scroll', () => {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+  
+      // Animation fluide pour le défilement
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+  
+      // Fonctionnalité du mode nuit
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      const body = document.body;
+  
+      darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          darkModeToggle.textContent = 'Mode Jour';
+        } else {
+          darkModeToggle.textContent = 'Mode Nuit';
+        }
+      });
+    </script>
+  </body></html>
